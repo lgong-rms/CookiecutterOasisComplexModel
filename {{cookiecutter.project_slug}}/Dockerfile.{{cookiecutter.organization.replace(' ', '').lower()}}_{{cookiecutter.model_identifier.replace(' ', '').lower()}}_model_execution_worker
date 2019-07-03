@@ -1,0 +1,5 @@
+FROM coreoasis/model_execution_worker:latest
+
+WORKDIR /home/worker
+COPY ./src/model_execution_worker/{{cookiecutter.organization.replace(' ', '')}} ./src/model_execution_worker/{{cookiecutter.organization.replace(' ', '')}}
+ENTRYPOINT ./startup.sh

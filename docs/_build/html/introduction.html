@@ -1,0 +1,295 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>cookiecutter-OasisModel &#8212; cookiecutter-OasisModel 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="cookiecutter-OasisModel" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cookiecutter-oasismodel">
+<h1>cookiecutter-OasisModel<a class="headerlink" href="#cookiecutter-oasismodel" title="Permalink to this headline">¶</a></h1>
+<p>A cookiecutter project structure for Oasis models that can be replicated
+using the <code class="docutils literal"><span class="pre">cookiecutter</span></code> Python tool.</p>
+<div class="section" id="cloning-the-repository">
+<h2>Cloning the repository<a class="headerlink" href="#cloning-the-repository" title="Permalink to this headline">¶</a></h2>
+<p>You can clone this repository from GitHub if you are a member of the
+Oasis development team on GitHub or have write access to the GitHub
+repository via another OasisLMF organizational team. You can clone over
+HTTPS or SSH, but it is recommended that that you use SSH: first ensure
+that you have generated an SSH key pair on your local machine and add
+the public key of that pair to your GitHub account (use the GitHub guide
+at <a class="reference external" href="https://help.github.com/articles/connecting-to-github-with-ssh/">https://help.github.com/articles/connecting-to-github-with-ssh/</a>).
+Then run</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="o">+</span><span class="n">ssh</span><span class="p">:</span><span class="o">//</span><span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OasisLMF</span><span class="o">/</span><span class="n">cookiecutter</span><span class="o">-</span><span class="n">OasisModel</span>
+</pre></div>
+</div>
+<p>To clone over HTTPS use</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OasisLMF</span><span class="o">/</span><span class="n">cookiecutter</span><span class="o">-</span><span class="n">OasisModel</span>
+</pre></div>
+</div>
+<p>You may receive a password prompt - to bypass the password prompt use</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">GitHub</span> <span class="n">user</span> <span class="n">name</span><span class="p">:</span><span class="n">GitHub</span> <span class="n">password</span><span class="o">&gt;</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">OasisLMF</span><span class="o">/</span><span class="n">cookiecutter</span><span class="o">-</span><span class="n">OasisModel</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="first-steps">
+<h2>First steps<a class="headerlink" href="#first-steps" title="Permalink to this headline">¶</a></h2>
+<p>Install cookiecutter (if not present):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>/home/foo$ pip install cookiecutter
+</pre></div>
+</div>
+<p>Run cookiecutter on the source repo (the URI can be specified using
+either <code class="docutils literal"><span class="pre">https</span></code> or <code class="docutils literal"><span class="pre">git</span></code> or <code class="docutils literal"><span class="pre">git+ssh</span></code>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>/home/foo$ cookiecutter git+ssh://git@github.com/OasisLMF/cookiecutter-OasisModel
+</pre></div>
+</div>
+<p>You should see the following prompts for project and model settings in
+sequence (press ENTER to use default values):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">project_name</span> <span class="p">[</span><span class="n">OM</span><span class="p">]:</span>
+<span class="n">project_slug</span> <span class="p">[</span><span class="n">OM</span><span class="p">]:</span>
+<span class="n">project_short_description</span> <span class="p">[</span><span class="n">Oasis</span> <span class="n">Model</span><span class="p">]:</span>
+<span class="n">project_maintainer</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">full</span> <span class="n">name</span> <span class="n">of</span> <span class="n">primary</span> <span class="n">project</span> <span class="n">maintainer</span><span class="o">&gt;</span><span class="p">]:</span>
+<span class="n">project_maintainer_email</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">primary</span> <span class="n">GitHub</span> <span class="n">account</span> <span class="n">email</span> <span class="n">of</span> <span class="n">primary</span> <span class="n">project</span> <span class="n">maintainer</span><span class="o">&gt;</span><span class="p">]:</span>
+<span class="n">version</span> <span class="p">[</span><span class="mf">0.0</span><span class="o">.</span><span class="mi">1</span><span class="p">]:</span>
+<span class="n">primary_language</span> <span class="p">[</span><span class="n">Python</span><span class="p">]:</span>
+<span class="n">organization</span> <span class="p">[</span><span class="n">OasisLMF</span><span class="p">]:</span>
+<span class="n">model_identifier</span> <span class="p">[</span><span class="n">OM</span><span class="p">]:</span>
+<span class="n">model_version</span> <span class="p">[</span><span class="mf">0.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">]:</span>
+</pre></div>
+</div>
+<p>These prompts are self-explanatory, but <code class="docutils literal"><span class="pre">project_name</span></code>,
+<code class="docutils literal"><span class="pre">project_slug</span></code>, <code class="docutils literal"><span class="pre">organization</span></code>, <code class="docutils literal"><span class="pre">model_identifier</span></code> and
+<code class="docutils literal"><span class="pre">model_version</span></code> are mandatory, while the others are optional. Here are
+some guidelines to follow for the mandatory prompts.</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">project_name</span></code> should be a concise title for the project (title
+words should be capitalised)</li>
+<li><code class="docutils literal"><span class="pre">project_slug</span></code> is the folder name for the project and by default
+cookiecutter will set this to a camel casing of the <code class="docutils literal"><span class="pre">project_name</span></code>
+value, but you may enter a specific value yourself, provided it does
+not contain spaces or any special characters not normally present in
+folder names</li>
+<li><code class="docutils literal"><span class="pre">organization</span></code> should either be a camel case of the organization
+name or an acronym</li>
+<li><code class="docutils literal"><span class="pre">model_identifier</span></code> should be a short ID for the full model name,
+e.g. an acronym of the full model name</li>
+<li><code class="docutils literal"><span class="pre">model_version</span></code> this can be any meaningful string that indicates a
+version for the model (by default it is set to <code class="docutils literal"><span class="pre">0.0.0.1</span></code>)</li>
+</ul>
+<p>The project structure is contained in the repo folder named
+<code class="docutils literal"><span class="pre">{{cookiecutter.project_slug}}</span></code> and project-related settings such
+as the project descriptive name, model name and version etc., which are
+set during runtime via the prompts, are configurable in the repo file
+<code class="docutils literal"><span class="pre">cookiecutter.json</span></code>.</p>
+<p>For the current state of the <code class="docutils literal"><span class="pre">{{cookiecutter.project_slug}}</span></code>directory you should see the following project structure in the place
+where you ran the command (assuming you used default boilerplate values
+for the project name, organization and model name):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>OM/
+├── Dockerfile.oasislmf_om_keys_server
+├── Dockerfile.oasislmf_om_model_execution_worker
+├── LICENSE
+├── README.md
+├── flamingo/
+│   └── generic_model/
+│       ├── Files/
+│       │   ├── MappingFiles/
+│       │   │   ├── Generic_Earthquake_CanLoc_BToModelLoc.mfd
+│       │   │   ├── Generic_Earthquake_SourceLocToCanLoc_A.mfd
+│       │   │   ├── Generic_Flood_CanLoc_BToModelLoc.mfd
+│       │   │   ├── Generic_Flood_SourceLocToCanLoc_A.mfd
+│       │   │   ├── Generic_SourceAccToCanAcc_A.mfd
+│       │   │   ├── Generic_Windstorm_CanLoc_BToModelLoc.mfd
+│       │   │   └── Generic_Windstorm_SourceLocToCanLoc_A.mfd
+│       │   ├── TransformationFiles/
+│       │   │   ├── MappingMapToGeneric_CanAcc_A.xslt
+│       │   │   ├── MappingMapToGeneric_Earthquake_CanLoc_A.xslt
+│       │   │   ├── MappingMapToGeneric_Earthquake_ModelLoc.xslt
+│       │   │   ├── MappingMapToGeneric_Flood_CanLoc_A.xslt
+│       │   │   ├── MappingMapToGeneric_Flood_ModelLoc.xslt
+│       │   │   ├── MappingMapToGeneric_Windstorm_CanLoc_A.xslt
+│       │   │   └── MappingMapToGeneric_Windstorm_ModelLoc.xslt
+│       │   └── ValidationFiles/
+│       │       ├── Generic_CanAcc_A.xsd
+│       │       ├── Generic_CanAcc_B.xsd
+│       │       ├── Generic_Earthquake_CanLoc_A.xsd
+│       │       ├── Generic_Earthquake_CanLoc_B.xsd
+│       │       ├── Generic_Earthquake_ModelLoc.xsd
+│       │       ├── Generic_Earthquake_SourceLoc.xsd
+│       │       ├── Generic_Flood_CanLoc_A.xsd
+│       │       ├── Generic_Flood_CanLoc_B.xsd
+│       │       ├── Generic_Flood_ModelLoc.xsd
+│       │       ├── Generic_Flood_SourceLoc.xsd
+│       │       ├── Generic_SourceAcc.xsd
+│       │       ├── Generic_Windstorm_CanLoc_A.xsd
+│       │       ├── Generic_Windstorm_CanLoc_B.xsd
+│       │       ├── Generic_Windstorm_ModelLoc.xsd
+│       │       └── Generic_Windstorm_SourceLoc.xsd
+│       └── SQLFiles/
+├── keys_data/
+│   └── OM/
+│       └── ModelVersion.csv
+├── keys_server_config/
+│   ├── apache2.conf
+│   ├── oasis.conf
+│   └── oasis.wsgi
+├── model_data/
+│   └── OM/
+│       ├── ModelVersion.csv
+│       ├── damage_bin_dict.bin
+│       ├── damage_bin_dict.csv
+│       ├── data.csv
+│       ├── events.bin
+│       ├── events.csv
+│       ├── footprint.bin
+│       ├── footprint.csv
+│       ├── footprint.idx
+│       ├── occurrence.bin
+│       ├── occurrence.csv
+│       ├── random.bin
+│       ├── random.csv
+│       ├── returnperiods.bin
+│       ├── returnperiods.csv
+│       ├── vulnerability.bin
+│       └── vulnerability.csv
+├── oasis_build_utils/
+│   └── keys_server_build_utils.sh
+├── oasislmf_om_keys_server_build_config
+├── src/
+│   ├── keys_server/
+│   │   ├── OM/
+│   │   │   ├── KeysServer.ini
+│   │   │   ├── OMKeysLookup.py
+│   │   │   ├── __init__.py
+│   │   │   ├── requirements.txt
+│   │   │   └── utils.py
+│   │   ├── __init__.py
+│   │   ├── __init__.py.base
+│   │   ├── requirements.txt
+│   │   └── utils.py
+│   ├── model_execution_worker/
+│   │   └── OM/
+│   │       ├── __init__.py
+│   │       └── supplier_model_runner.py
+│   └── oasis_keys_server/
+│       ├── KeysServer.ini
+│       ├── LICENSE
+│       ├── README.md
+│       ├── __init__.py
+│       ├── app.py
+│       ├── docs/
+│       ├── requirements.txt
+│       ├── startup.sh
+│       ├── tests/
+│       │   ├── KeysServerTests.ini
+│       │   ├── KeysServerTests.py
+│       │   ├── __init__.py
+│       │   └── requirements.txt
+│       └── utils.py
+└── tests/
+    └── keys_server_tests/
+        └── data/
+            └── OM/
+                ├── KeysServerTests.ini
+                └── ModelVersion.csv
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">cookiecutter-OasisModel</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">cookiecutter-OasisModel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cloning-the-repository">Cloning the repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#first-steps">First steps</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">cookiecutter-OasisModel</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Oasis Loss Modelling Framework (v. 0.8, 28 September, 2017)..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/introduction.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
