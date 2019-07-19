@@ -1,0 +1,25 @@
+ARG worker_ver=latest
+FROM coreoasis/model_worker:$worker_ver
+
+RUN apt-get update && apt-get install -y --no-install-recommends libgdal20 sqlite3 unixodbc minizip \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+    && apt-get autoremove -y
+
+COPY ./requirements.txt /tmp/
+RUN pip3 install -r /tmp/requirements.txt
+
+COPY ./bin/Oasis-19.0.0-Linux.deb /var/work/Oasis-19.0.0-Linux.deb
+COPY ./meta-data/conf.ini ./
+COPY ./src/{{cookiecutter.organization.replace(' ', '').lower()}}_{{cookiecutter.model_identifier.replace(' ', '').lower()}} /var/{{cookiecutter.organization.replace(' ', '').lower()}}/{{cookiecutter.organization.replace(' ', '').lower()}}_{{cookiecutter.model_identifier.replace(' ', '').lower()}}
+COPY ./src/setup.py /var/{{cookiecutter.organization.replace(' ', '').lower()}}/
+COPY ./src/MANIFEST.in /var/{{cookiecutter.organization.replace(' ', '').lower()}}/
+
+RUN pip3 install -e /var/corelogic/ && dpkg -i /var/work/Oasis-19.0.0-Linux.deb \
+    && echo "export {{cookiecutter.organization.replace(' ', '').upper()}}_DATA_PATH=/var/oasis/model_data" >> /etc/profile \
+    && echo "export {{cookiecutter.organization.replace(' ', '').upper()}}_TEMP_PATH=/tmp" >> /etc/profile
+
+ENV {{cookiecutter.organization.replace(' ', '').upper()}}_TEMP_PATH /tmp
+ENV {{cookiecutter.organization.replace(' ', '').upper()}}_DATA_PATH /var/oasis/model_data
+
+WORKDIR /home/worker
+ENTRYPOINT [ "/home/worker/startup.sh" ]

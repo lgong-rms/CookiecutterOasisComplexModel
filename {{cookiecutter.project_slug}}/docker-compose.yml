@@ -1,0 +1,134 @@
+version: '3'
+services:
+  server:
+   restart: always
+   image: coreoasis/api_server:${OASIS_API_VER}
+   ports:
+     - 8000:8000
+   links:
+     - server-db
+     - celery-db
+     - rabbit
+   environment:
+     - OASIS_ADMIN_USER=admin
+     - OASIS_ADMIN_PASS=password
+     - OASIS_DEBUG=1
+     - OASIS_RABBIT_HOST=rabbit
+     - OASIS_RABBIT_PORT=5672
+     - OASIS_RABBIT_USER=rabbit
+     - OASIS_RABBIT_PASS=rabbit
+     - OASIS_SERVER_DB_HOST=server-db
+     - OASIS_SERVER_DB_PASS=oasis
+     - OASIS_SERVER_DB_USER=oasis
+     - OASIS_SERVER_DB_NAME=oasis
+     - OASIS_SERVER_DB_PORT=3306
+     - OASIS_CELERY_DB_ENGINE=db+mysql+pymysql
+     - OASIS_CELERY_DB_HOST=celery-db
+     - OASIS_CELERY_DB_PASS=password
+     - OASIS_CELERY_DB_USER=celery
+     - OASIS_CELERY_DB_NAME=celery
+     - OASIS_CELERY_DB_PORT=3306
+     - STARTUP_RUN_MIGRATIONS=true
+   volumes:
+     - ${OASIS_MEDIA_ROOT:-./docker-shared-fs}:/shared-fs:rw
+     - ./meta-data/model_resource.json:/var/www/oasis/src/server/static/model_resource.json
+  worker-monitor:
+   restart: always
+   image: coreoasis/api_server:${OASIS_API_VER}
+   command: [wait-for-server, 'server:8000', celery, worker, -A, src.server.oasisapi, --loglevel=INFO]
+   links:
+     - server-db
+     - celery-db
+     - rabbit
+   environment:
+     - OASIS_DEBUG=1
+     - OASIS_RABBIT_HOST=rabbit
+     - OASIS_RABBIT_PORT=5672
+     - OASIS_RABBIT_USER=rabbit
+     - OASIS_RABBIT_PASS=rabbit
+     - OASIS_SERVER_DB_HOST=server-db
+     - OASIS_SERVER_DB_PASS=oasis
+     - OASIS_SERVER_DB_USER=oasis
+     - OASIS_SERVER_DB_NAME=oasis
+     - OASIS_SERVER_DB_PORT=3306
+     - OASIS_CELERY_DB_ENGINE=db+mysql+pymysql
+     - OASIS_CELERY_DB_HOST=celery-db
+     - OASIS_CELERY_DB_PASS=password
+     - OASIS_CELERY_DB_USER=celery
+     - OASIS_CELERY_DB_NAME=celery
+     - OASIS_CELERY_DB_PORT=3306
+   volumes:
+     - ${OASIS_MEDIA_ROOT:-./docker-shared-fs}:/shared-fs:rw
+  worker:
+    restart: always
+    image: coreoasis/{{cookiecutter.organization.replace(' ', '').lower()}}_{{cookiecutter.model_identifier.replace(' ', '').lower()}}:${MODEL_VER}
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      args:
+        - worker_ver=${OASIS_API_VER}
+    links:
+     - celery-db
+     - rabbit:myrabbit
+    environment:
+     - OASIS_MODEL_SUPPLIER_ID={{cookiecutter.organization.replace(' ', '')}}
+     - OASIS_MODEL_ID={{cookiecutter.organization.replace(' ', '').lower()}}_{{cookiecutter.model_identifier.replace(' ', '').lower()}}
+     - OASIS_MODEL_VERSION_ID={{cookiecutter.model_version}}
+     - OASIS_DEBUG_MODE=true
+     - OASIS_RABBIT_HOST=rabbit
+     - OASIS_RABBIT_PORT=5672
+     - OASIS_RABBIT_USER=rabbit
+     - OASIS_RABBIT_PASS=rabbit
+     - OASIS_CELERY_DB_ENGINE=db+mysql+pymysql
+     - OASIS_CELERY_DB_HOST=celery-db
+     - OASIS_CELERY_DB_PASS=password
+     - OASIS_CELERY_DB_USER=celery
+     - OASIS_CELERY_DB_NAME=celery
+     - OASIS_CELERY_DB_PORT=3306
+    volumes:
+     - ${MODEL_DATA_ROOT:-./}:/var/oasis/model_data/:rw
+     - ${OASIS_MEDIA_ROOT:-./docker-shared-fs}:/shared-fs:rw
+  server-db:
+    restart: always
+    image: mysql:8.0
+    command:
+      - --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=oasis
+      - MYSQL_PASSWORD=oasis
+      - MYSQL_DATABASE=oasis
+    volumes:
+      - ${OASIS_DOCKER_DB_DATA_DIR:-./db-data}/server:/var/lib/mysql/:rw
+  celery-db:
+    restart: always
+    image: mysql
+    command:
+      - --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_USER=celery
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=celery
+    volumes:
+      - ${OASIS_DOCKER_DB_DATA_DIR:-./db-data}/celery:/var/lib/mysql/:rw
+  rabbit:
+    restart: always
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbit
+      - RABBITMQ_DEFAULT_PASS=rabbit
+    ports:
+      - 5672:5672
+      - 15672:15672
+  user-interface:
+    restart: always
+    image: coreoasis/oasisui_app:${OASIS_UI_VER}
+    environment:
+     - API_IP=server
+     - API_PORT=8000
+     - API_VERSION=v1
+     - API_SHARE_FILEPATH=./downloads
+     - OASIS_ENVIRONMENT=oasis_localhost
+    ports:
+     - 8080:3838

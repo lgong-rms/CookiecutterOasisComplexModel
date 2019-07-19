@@ -1,0 +1,36 @@
+{
+    "model_settings": [
+        {
+            "event_set": {
+                "name": "Event Set",
+                "desc": "Either Probablistic or Historic",
+                "type": "dictionary",
+                "default": "P",
+                "values": {
+                    "P": "Probabilistic",
+                    "H": "Historic"
+                }
+            }
+        },
+        {
+            "event_occurrence_id": {
+                "name": "Occurrence Set",
+                "desc": "Frequency Model",
+                "type": "dictionary",
+                "default": "td",
+                "values": {
+                    "td": "Time Dependent",
+                    "ti": "Time Independent"
+                }
+            }
+        }
+    ],
+    "lookup_settings": [
+        {
+            "PerilCodes": {
+                "type": "dictionary",
+                "values": {}
+            }
+        }
+    ]
+}

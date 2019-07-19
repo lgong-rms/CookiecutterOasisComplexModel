@@ -1,0 +1,50 @@
+{
+	"model_settings": [{
+			"event_set": {
+				"name": "Event Set",
+				"desc": "Either Probablistic or Historic",
+				"type": "dictionary",
+				"default": "P",
+
+				"values": {
+					"P": "Proabilistic",
+					"H": "Historic"
+				}
+			}
+		},
+		{
+			"event_occurrence_id": {
+				"name": "Occurrence Set",
+				"desc": "Tooltip for Occurrence selection",
+				"type": "dictionary",
+				"default": "1",
+				"values": {
+					"1": "Long Term",
+					"2": "Near Term WSST",
+					"3": "Historic"
+				}
+			}
+
+		},
+		{
+			"demand_surge": {
+				"name": "Demand Surge",
+				"desc": "Include Demand Surge",
+				"type": "dictionary",
+				"default": "Y",
+				"values": {
+					"Y": "Yes",
+					"N": "No"
+				}
+			}
+		}
+	],
+	"lookup_settings": [{
+		"PerilCodes": {
+			"type": "dictionary",
+			"values": {
+				"QEQ": "Quake Peril"
+			}
+		}
+	}]
+}
