@@ -2,6 +2,6 @@
     "lookup_package_path": "/var/corelogic/{{cookiecutter.organization.replace(' ', '').lower()}}_{{cookiecutter.model_identifier.replace(' ', '').lower()}}",
     "model_package_path": "/var/{{cookiecutter.organization.replace(' ', '').lower()}}/{{cookiecutter.organization.replace(' ', '').lower()}}_{{cookiecutter.model_identifier.replace(' ', '').lower()}}",
     "keys_data_path": "/var/oasis/model_data",
-    "model_version_file_path": "/var/{{cookiecutter.organization.replace(' ', '').lower()/{{cookiecutter.organization.replace(' ', '').lower()}}_{{cookiecutter.model_identifier.replace(' ', '').lower()}}/ModelVersion.csv",
+    "model_version_file_path": "/var/{{cookiecutter.organization.replace(' ', '').lower()}}/{{cookiecutter.organization.replace(' ', '').lower()}}_{{cookiecutter.model_identifier.replace(' ', '').lower()}}/ModelVersion.csv",
     "model_data_path": "/var/oasis/model_data"
 }
